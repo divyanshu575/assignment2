@@ -1,7 +1,21 @@
 steps:
+
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'us-central1-docker.pkg.dev/direct-subject-435905-d2/divyanshu-100976591/myapp:$COMMIT_SHA', '.']
+
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/direct-subject-435905-d2/divyanshu-100976591/myapp:$COMMIT_SHA']
+
+  - name: 'google/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud run deploy myapp \
+          --image us-central1-docker.pkg.dev/direct-subject-435905-d2/divyanshu-100976591/myapp:$COMMIT_SHA \
+          --platform managed \
+          --region us-central1 \
+          --allow-unauthenticated
+
 options:
   logging: CLOUD_LOGGING_ONLY
