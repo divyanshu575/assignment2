@@ -1,7 +1,7 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'REGISTRY_URL/REPO_NAME:$COMMIT_SHA', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/direct-subject-435905-d2/divyanshu-100976591/myapp:$COMMIT_SHA', '.']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'REGISTRY_URL/REPO_NAME:$COMMIT_SHA']
+    args: ['push', 'us-central1-docker.pkg.dev/direct-subject-435905-d2/divyanshu-100976591/myapp:$COMMIT_SHA']
 options:
-  logging: REGIONAL_USER_OWNED_BUCKET
+  logging: CLOUD_LOGGING_ONLY
